@@ -17,14 +17,26 @@
             const response = await fetch(csvUrl);
             const data = await response.text();
 
-            const rows = data.split('\n');
+            const rows = data.split('\n').slice(1); // Skip header row
             const list = document.getElementById('songs-list');
 
             rows.forEach((row, index) => {
-                const [rank, title, artist] = row.split(',');
-                if (rank && title && artist) {
+                const [title, artist, year, rarity, language, country, notes] = row.split(',');
+
+                // Check if all the fields are populated
+                if (title && artist && year && rarity && language && country && notes) {
                     const listItem = document.createElement('li');
-                    listItem.textContent = `#${rank.trim()}: ${title.trim()} by ${artist.trim()}`;
+                    
+                    // Display rank and song details
+                    listItem.innerHTML = `
+                        <strong>#${index + 1}: ${title.trim()}</strong> by ${artist.trim()}<br>
+                        <strong>Year:</strong> ${year.trim()} | 
+                        <strong>Rarity:</strong> ${rarity.trim()} | 
+                        <strong>Language:</strong> ${language.trim()} | 
+                        <strong>Country:</strong> ${country.trim()}<br>
+                        <strong>Notes:</strong> ${notes.trim()}
+                    `;
+
                     list.appendChild(listItem);
                 }
             });
@@ -61,5 +73,4 @@
     </script>
 </body>
 </html>
-2. Add CSS for Styling
-</html>
+
