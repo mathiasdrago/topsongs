@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Songs List</title>
+</head>
+<body>
+    <h1>Top Songs Ever</h1>
+    <ul id="songs-list"></ul>
+
+    <script>
+        // Replace with your published CSV URL
+        const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT3cZn4qtV7bTm_C5YDBeYakH2rDS5lyiGKG1QKUPBCUyeK3REJsD7J_WzIe-YYCxUAO9FRQt6gBJ6O/pub?gid=0&single=true&output=csv';
+
+        async function loadSongs() {
+            const response = await fetch(csvUrl);
+            const data = await response.text();
+
+            const rows = data.split('\n');
+            const list = document.getElementById('songs-list');
+
+            rows.forEach((row, index) => {
+                const [rank, title, artist] = row.split(',');
+                if (rank && title && artist) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `#${rank.trim()}: ${title.trim()} by ${artist.trim()}`;
+                    list.appendChild(listItem);
+                }
+            });
+        }
+
+        loadSongs();
+    </script>
+</body>
+</html>
