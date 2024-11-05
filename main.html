@@ -32,5 +32,34 @@
 
         loadSongs();
     </script>
+
+    <h1>Top Songs Ever</h1>
+    <p>Counting down the greatest songs of all time. Updated live from the spreadsheet!</p>
+    <ol id="songs-list"></ol> <!-- Using an ordered list for descending effect -->
+
+    <script>
+        const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT3cZn4qtV7bTm_C5YDBeYakH2rDS5lyiGKG1QKUPBCUyeK3REJsD7J_WzIe-YYCxUAO9FRQt6gBJ6O/pub?gid=0&single=true&output=csv';
+
+        async function loadSongs() {
+            const response = await fetch(csvUrl);
+            const data = await response.text();
+
+            const rows = data.split('\n').slice(1); // Skip the header row
+            const list = document.getElementById('songs-list');
+
+            rows.reverse().forEach((row, index) => {
+                const [rank, title, artist] = row.split(',');
+                if (rank && title && artist) {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `<strong>${title.trim()}</strong> by ${artist.trim()}`;
+                    list.appendChild(listItem);
+                }
+            });
+        }
+
+        loadSongs();
+    </script>
 </body>
+</html>
+2. Add CSS for Styling
 </html>
