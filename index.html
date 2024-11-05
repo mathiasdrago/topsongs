@@ -25,18 +25,21 @@
             rows.forEach((row, index) => {
                 const [title, artist, year, rarity, language, country, notes] = row.split(',');
 
-                // Check if all the fields are populated
-                if (title && artist && year && rarity && language && country && notes) {
+                // Create placeholders for missing data (if any field is empty, it will be "N/A")
+                const getData = (field) => field ? field.trim() : 'N/A';
+
+                // Check if title and artist are present, otherwise skip the song
+                if (title && artist) {
                     const listItem = document.createElement('li');
                     
-                    // Display rank and song details
+                    // Display rank and song details, using placeholders where data is missing
                     listItem.innerHTML = `
-                        <strong>#${index + 1}: ${title.trim()}</strong> by ${artist.trim()}<br>
-                        <strong>Year:</strong> ${year.trim()} | 
-                        <strong>Rarity:</strong> ${rarity.trim()} | 
-                        <strong>Language:</strong> ${language.trim()} | 
-                        <strong>Country:</strong> ${country.trim()}<br>
-                        <strong>Notes:</strong> ${notes.trim()}
+                        <strong>#${index + 1}: ${getData(title)}</strong> by ${getData(artist)}<br>
+                        <strong>Year:</strong> ${getData(year)} | 
+                        <strong>Rarity:</strong> ${getData(rarity)} | 
+                        <strong>Language:</strong> ${getData(language)} | 
+                        <strong>Country:</strong> ${getData(country)}<br>
+                        <strong>Notes:</strong> ${getData(notes)}
                     `;
 
                     list.appendChild(listItem);
