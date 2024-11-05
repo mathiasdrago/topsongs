@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    color: #343a40;
+    font-family: 'Fira Code', monospace; /* Set the font to Fira Code */
+    background-color: #f0f0f0; /* Light grey background */
+    color: #d6c49a; /* Light ocre text color */
     text-align: center;
     margin: 0;
     padding: 20px;
@@ -9,7 +11,7 @@ body {
 
 h1 {
     font-size: 2em;
-    color: #007bff;
+    color: #d6c49a; /* Keep the header in light ocre */
 }
 
 p {
@@ -17,29 +19,31 @@ p {
     margin-bottom: 20px;
 }
 
+/* Style for the ordered list */
 #songs-list {
-    list-style: none;
+    list-style: none; /* Remove default list styling */
     padding: 0;
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 800px;
+    margin: 0 auto; /* Center the list */
 }
 
+/* Style for each song list item */
 #songs-list li {
-    background: #ffffff;
-    border: 1px solid #ced4da;
+    background: white; /* White background for each song */
+    border: 1px solid #d6c49a; /* Light ocre border */
     padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
-    font-size: 1.1em;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px 0; /* Space between songs */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    display: flex; /* Flexbox to align items */
+    align-items: center; /* Center items vertically */
 }
 
-#songs-list li strong {
-    font-weight: bold;
-    color: #007bff;
-}
-#songs-list li:hover {
-    background-color: #e9ecef;
-    transform: scale(1.02);
-    transition: 0.3s;
+/* Style for the square box */
+#songs-list li::before {
+    content: ''; /* Create a square box */
+    width: 3px; /* Width of the box */
+    height: 3px; /* Height of the box */
+    background-color: #d6c49a; /* Light ocre color for the box */
+    margin-right: 10px; /* Space between the box and the text */
 }
